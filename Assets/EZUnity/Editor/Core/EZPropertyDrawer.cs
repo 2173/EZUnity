@@ -30,11 +30,35 @@ namespace EZUnity
             typeof(Vector2Int),
             typeof(Vector3Int),
         };
+        static EZPropertyDrawer()
+        {
+            List<Assembly> assemblies = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(IsSupportedAssembly)
+                .ToList();
+            typeList.AddRange(from assembly in assemblies
+                              from type in assembly.GetExportedTypes()
+                              where IsSupportedType(type)
+                              select type);
+            typeList.Sort((t1, t2) => (string.Compare(t1.FullName, t2.FullName)));
+        }
+        public static bool IsSupportedAssembly(Assembly assembly)
+        {
+            string assemblyName = assembly.GetName().Name;
+            // filter out editor assemblies
+            if (assemblyName.StartsWith("UnityEditor") || assemblyName.EndsWith("Editor")) return false;
+            Debug.Log(assemblyName);
+            // package assemblies or project assemblies
+            if (assemblyName.StartsWith("Unity") || assemblyName == "Assembly-CSharp") return true;
+            return false;
+        }
         public static bool IsSupportedType(Type type)
         {
             if (type.IsAbstract || type.IsGenericType) return false;
+            // Editor is subclass of ScriptableObject!
+            if (type.IsSubclassOf(typeof(Editor)) || type.FullName.StartsWith("UnityEditor")) return false;
             return type.IsSubclassOf(typeof(UnityEngine.Object));
         }
+
         public static Type GetType(string typeName)
         {
             foreach (Type type in typeList)
@@ -42,17 +66,6 @@ namespace EZUnity
                 if (type.FullName == typeName) return type;
             }
             return null;
-        }
-        static EZPropertyDrawer()
-        {
-            List<Assembly> assemblies = AppDomain.CurrentDomain.GetAssemblies()
-                .Where((assembly) => assembly.FullName.StartsWith("UnityEngine") || assembly.GetName().Name == "Assembly-CSharp")
-                .ToList();
-            typeList.AddRange(from assembly in assemblies
-                              from type in assembly.GetExportedTypes()
-                              where IsSupportedType(type)
-                              select type);
-            typeList.Sort((t1, t2) => (string.Compare(t1.FullName, t2.FullName)));
         }
 
         float lineHeight = EditorGUIUtility.singleLineHeight;
