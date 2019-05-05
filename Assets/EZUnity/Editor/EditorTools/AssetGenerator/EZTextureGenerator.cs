@@ -12,7 +12,8 @@ namespace EZUnity
     public abstract class EZTextureGenerator : ScriptableObject
     {
         public Vector2Int resolution = new Vector2Int(256, 256);
-        public TextureFormat textureFormat = TextureFormat.RGB24;
+        public TextureFormat textureFormat = TextureFormat.RGBA32;
+        public TextureEncoding textureEncoding = TextureEncoding.PNG;
         [UnityEngine.Serialization.FormerlySerializedAs("textureReference")]
         public Texture2D targetTexture;
 
@@ -27,7 +28,7 @@ namespace EZUnity
         {
             Texture2D texture = new Texture2D(resolution.x, resolution.y, textureFormat, false);
             ApplyToTexture(texture);
-            byte[] bytes = texture.EncodeToPNG();
+            byte[] bytes = texture.Encode(textureEncoding);
             DestroyImmediate(texture);
             return bytes;
         }
@@ -41,7 +42,7 @@ namespace EZUnity
                 int index = 0;
                 do
                 {
-                    path = string.Format("{0}_{1:D2}.{2}", prefix, index, "png");
+                    path = string.Format("{0}_{1:D2}.{2}", prefix, index, textureEncoding.ToString().ToLower());
                     index++;
                 } while (File.Exists(path));
                 File.WriteAllBytes(path, GetTextureData(resolution, textureFormat));
@@ -55,6 +56,12 @@ namespace EZUnity
             {
                 string path = AssetDatabase.GetAssetPath(targetTexture);
                 File.WriteAllBytes(path, GetTextureData(resolution, textureFormat));
+                string extension = "." + textureEncoding.ToString().ToLower();
+                if (Path.GetExtension(path) != extension)
+                {
+                    string newPath = Path.ChangeExtension(path, extension);
+                    AssetDatabase.MoveAsset(path, newPath);
+                }
                 AssetDatabase.Refresh();
             }
         }

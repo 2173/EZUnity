@@ -136,13 +136,13 @@ public class EZShaderGUI : ShaderGUI
             {
                 materialEditor.ShaderProperty(_AlphaClipThreshold);
             }
-            materialEditor.BlendMode(_SrcBlendMode);
-            materialEditor.BlendMode(_DstBlendMode);
+            materialEditor.ShaderProperty(_SrcBlendMode);
+            materialEditor.ShaderProperty(_DstBlendMode);
             materialEditor.Toggle(_ZWriteMode);
             EditorGUI.indentLevel--;
         }
 
-        materialEditor.CullMode(_CullMode);
+        materialEditor.ShaderProperty(_CullMode);
         materialEditor.ShaderProperty(_OffsetFactor);
         materialEditor.ShaderProperty(_OffsetUnit);
 
@@ -193,7 +193,7 @@ public class EZShaderGUI : ShaderGUI
             case RenderingModePresets.Fade:
                 material.SetOverrideTag(Tag_RenderType, "Transparent");
                 material.SetKeyword(AlphaMode.AlphaBlend);
-                material.SetInt(Property_AlphaMode, (int)AlphaMode.AlphaTest);
+                material.SetInt(Property_AlphaMode, (int)AlphaMode.AlphaBlend);
                 material.SetInt(Property_SrcBlendMode, (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
                 material.SetInt(Property_DstBlendMode, (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
                 material.SetInt(Property_ZWriteMode, 0);
@@ -202,7 +202,7 @@ public class EZShaderGUI : ShaderGUI
             case RenderingModePresets.Transparent:
                 material.SetOverrideTag(Tag_RenderType, "Transparent");
                 material.SetKeyword(AlphaMode.None);
-                material.SetInt(Property_AlphaMode, (int)AlphaMode.AlphaTest);
+                material.SetInt(Property_AlphaMode, (int)AlphaMode.AlphaPremultiply);
                 material.SetInt(Property_SrcBlendMode, (int)UnityEngine.Rendering.BlendMode.One);
                 material.SetInt(Property_DstBlendMode, (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
                 material.SetInt(Property_ZWriteMode, 0);

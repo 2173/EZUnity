@@ -4,14 +4,13 @@
  * Description:     
  */
 using System;
-using System.IO;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
 namespace EZUnity
 {
-    [CreateAssetMenu(fileName = "EZPlayerBuilder", menuName = "EZUnity/EZPlayerBuilder", order = EZAssetMenuOrder.EZPlayerBuilder)]
+    [CreateAssetMenu(fileName = "EZPlayerBuilder", menuName = "EZUnity/EZPlayerBuilder", order = (int)EZAssetMenuOrder.EZPlayerBuilder)]
     public class EZPlayerBuilder : ScriptableObject
     {
         public const string Wildcard_Date = "<Date>";
@@ -104,12 +103,15 @@ namespace EZUnity
                 case BuildTarget.StandaloneWindows64:
                     options.locationPathName = string.Format("{0}/{1}.exe", path, PlayerSettings.productName);
                     break;
+                case BuildTarget.Android:
+                    options.locationPathName = string.Format("{0}.apk", path);
+                    break;
                 default:
                     options.locationPathName = path;
                     break;
             }
             options.target = buildTarget;
-            options.options = BuildOptions.None;
+            options.options = BuildOptions.ShowBuiltPlayer;
             BuildReport report = BuildPipeline.BuildPlayer(options);
             var summary = report.summary;
             switch (summary.result)
@@ -119,7 +121,6 @@ namespace EZUnity
                     break;
                 case BuildResult.Succeeded:
                     Debug.Log("Build Succeeded");
-                    Application.OpenURL(Directory.GetParent(summary.outputPath).FullName);
                     break;
             }
         }

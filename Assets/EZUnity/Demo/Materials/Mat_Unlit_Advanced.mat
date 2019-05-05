@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_Effects_EZReflection_2
-  m_Shader: {fileID: 4800000, guid: 2c2235abee4d1d5478883a6499c5527a, type: 3}
-  m_ShaderKeywords: 
+  m_Name: Mat_Unlit_Advanced
+  m_Shader: {fileID: 4800000, guid: 3174e1680008a9f4bacecc496f190e36, type: 3}
+  m_ShaderKeywords: _ALPHAMODE_NONE _ZWRITEMODE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -23,10 +23,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _ReflectionTex:
-        m_Texture: {fileID: 8400000, guid: dafc9e18ca63dfd4ba41af0bcc4080e6, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats: []
+    m_Floats:
+    - _AlphaClipThreshold: 0.5
+    - _AlphaMode: 0
+    - _CullMode: 2
+    - _DstBlendMode: 0
+    - _OffsetFactor: 0
+    - _OffsetUnit: 0
+    - _SrcBlendMode: 1
+    - _ZWriteMode: 1
     m_Colors:
-    - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
