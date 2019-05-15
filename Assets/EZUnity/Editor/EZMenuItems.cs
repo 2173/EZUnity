@@ -28,6 +28,7 @@ namespace EZUnity
             GuidGenerator,
             AssetBundleManager,
             AssetReferenceViewer,
+            CorrespondingObjectViewer,
             FontReferenceViewer,
             PlayerPrefsEditor,
             ColorBlender,
@@ -103,13 +104,18 @@ namespace EZUnity
         {
             EditorWindow.GetWindow<EZColorBlender>("Color Blender").Show();
         }
-
+        [MenuItem(ROOT_NAME + "/Corresponding Object Viewer", false, (int)Order.CorrespondingObjectViewer)]
+        private static void CorrespondingObjectViewer()
+        {
+            EditorWindow.GetWindow<EZCorrespondingObjectViewer>("Corresponding Object Viewer").Show();
+        }
         [MenuItem(ROOT_NAME + "/Experimental/Shader Keyword Manager", false, (int)Order.ShaderKeywordManager)]
         private static void ShaderKeywordManager()
         {
             EditorWindow.GetWindow<EZShaderKeywordManager>("Keyword Manager").Show();
         }
 
+#if UNITY_2018_3_OR_NEWER
         [SettingsProvider]
         private static SettingsProvider CreateEZScriptSettingsProvider()
         {
@@ -136,5 +142,6 @@ namespace EZUnity
             EZGraphicsSettings provider = new EZGraphicsSettings("Project/" + ROOT_NAME + "/EZGraphicsSettings", SettingsScope.Project);
             return provider;
         }
+#endif
     }
 }

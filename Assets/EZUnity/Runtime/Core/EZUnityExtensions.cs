@@ -141,6 +141,14 @@ namespace EZUnity
         {
             return Mathf.Min(v.x, v.y);
         }
+        public static float Lerp(this Vector2 v, float t)
+        {
+            return Mathf.Lerp(v.x, v.y, t);
+        }
+        public static float InverseLerp(this Vector2 v, float value)
+        {
+            return Mathf.InverseLerp(v.x, v.y, value);
+        }
 
         public static Vector3 Abs(this Vector3 v)
         {
@@ -237,7 +245,13 @@ namespace EZUnity
             {
                 case TextureEncoding.PNG: return texture.EncodeToPNG();
                 case TextureEncoding.JPG: return texture.EncodeToJPG();
-                case TextureEncoding.TGA: return texture.EncodeToTGA();
+                case TextureEncoding.TGA:
+#if UNITY_2018_3_OR_NEWER
+                    return texture.EncodeToTGA();
+#else
+                    Debug.LogError("TGA encoding is available on Unity2018.3 or newer version, PNG encoding will be used");
+                    break;
+#endif
             }
             return texture.EncodeToPNG();
         }
