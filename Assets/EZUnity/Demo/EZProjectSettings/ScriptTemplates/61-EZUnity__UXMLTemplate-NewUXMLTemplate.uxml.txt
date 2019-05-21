@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML xmlns:engine="UnityEngine.Experimental.UIElements" 
+  xmlns:editor="UnityEditor.Experimental.UIElements">
+  <engine:VisualElement>
+
+  </engine:VisualElement>
+</engine:UXML>
