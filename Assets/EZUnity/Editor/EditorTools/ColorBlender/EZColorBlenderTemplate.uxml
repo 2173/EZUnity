@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML xmlns:engine="UnityEngine.Experimental.UIElements" 
+  xmlns:editor="UnityEditor.Experimental.UIElements">
+  <engine:Template path="Assets/EZUnity/Editor/EditorTools/ColorBlender/ColorInfoTemplate.uxml" name="ColorInfoTemplate"/>
+  <engine:VisualElement name="MainWindow" class="window">
+    <engine:VisualElement name="ScriptTitle" class="title">
+      <editor:ObjectField name="ScriptTitleField"/>
+    </engine:VisualElement>
+    <engine:VisualElement name="InputSection" class="section">
+      <engine:Label text="Input" class="header"/>
+      <engine:Toggle text="Use HDR" value="false"/>
+      <engine:VisualElement class="input-color-row">
+        <engine:Instance template="ColorInfoTemplate" name="SrcColor"/>
+        <engine:Instance template="ColorInfoTemplate" name="DstColor"/>
+      </engine:VisualElement>
+    </engine:VisualElement>
+    <engine:VisualElement name="ResultSection" class="section">
+      <engine:Label text="Results" class="header"/>
+      <engine:VisualElement class="result-color-row">
+        <engine:Instance template="ColorInfoTemplate" name="Add" />
+        <engine:Instance template="ColorInfoTemplate" name="Minus" />
+        <engine:Instance template="ColorInfoTemplate" name="Multiply" />
+        <engine:Instance template="ColorInfoTemplate" name="Divide" />
+      </engine:VisualElement>
+      <engine:VisualElement class="result-color-row">
+        <engine:Instance template="ColorInfoTemplate" name="Opacity" />
+        <engine:Instance template="ColorInfoTemplate" name="Darken" />
+        <engine:Instance template="ColorInfoTemplate" name="Lighten" />
+        <engine:Instance template="ColorInfoTemplate" name="Screen" />
+      </engine:VisualElement>
+      <engine:VisualElement class="result-color-row">
+        <engine:Instance template="ColorInfoTemplate" name="ColorBurn" />
+        <engine:Instance template="ColorInfoTemplate" name="ColorDodge" />
+        <engine:Instance template="ColorInfoTemplate" name="LinearBurn" />
+        <engine:Instance template="ColorInfoTemplate" name="LinearDodge" />
+      </engine:VisualElement>
+      <engine:VisualElement class="result-color-row">
+        <engine:Instance template="ColorInfoTemplate" name="Overlay" />
+        <engine:Instance template="ColorInfoTemplate" name="HardLight" />
+        <engine:Instance template="ColorInfoTemplate" name="SoftLight" />
+        <engine:Instance template="ColorInfoTemplate" name="VividLight" />
+      </engine:VisualElement>
+      <engine:VisualElement class="result-color-row">
+        <engine:Instance template="ColorInfoTemplate" name="LinearLight" />
+        <engine:Instance template="ColorInfoTemplate" name="PinLight" />
+        <engine:Instance template="ColorInfoTemplate" name="HardMix" />
+        <engine:Instance template="ColorInfoTemplate" name="Difference" />
+      </engine:VisualElement>
+      <engine:VisualElement class="result-color-row">
+        <engine:Instance template="ColorInfoTemplate" name="Exclusion" />
+      </engine:VisualElement>
+      <engine:VisualElement class="result-color-row">
+        <engine:Instance template="ColorInfoTemplate" name="HSVBlend_H" />
+        <engine:Instance template="ColorInfoTemplate" name="HSVBlend_S" />
+        <engine:Instance template="ColorInfoTemplate" name="HSVBlend_V" />
+        <engine:Instance template="ColorInfoTemplate" name="HSVBlend_HS" />
+      </engine:VisualElement>
+    </engine:VisualElement>
+  </engine:VisualElement>
+</engine:UXML>

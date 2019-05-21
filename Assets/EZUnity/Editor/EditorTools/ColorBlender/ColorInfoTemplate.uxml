@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<engine:UXML xmlns:engine="UnityEngine.Experimental.UIElements" 
+  xmlns:editor="UnityEditor.Experimental.UIElements">
+  <engine:VisualElement class="color-info">
+    <engine:Label name="ColorName" text="ColorName"/>
+    <editor:ColorField name="ColorField" color="rgb(255,255,255)"/>
+    <engine:TextField name="ColorString" text="#ffffff"/>
+  </engine:VisualElement>
+</engine:UXML>

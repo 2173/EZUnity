@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 74ed41ec1afd9714091ce0b58f8df789
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_ViewDataDictionary: {instanceID: 0}
+  - uiTemplate: {fileID: 9197481963319205126, guid: 9696ac25b7373624c8e1e9b6e79878ae,
+      type: 3}
+  - colorInfoTemplate: {fileID: 9197481963319205126, guid: 43b3ccde117274a419425a38ac631494,
+      type: 3}
+  - styleSheet: {fileID: 7433441132597879392, guid: bbbbb1428b9595f4c9dcc07e92d267ce,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
