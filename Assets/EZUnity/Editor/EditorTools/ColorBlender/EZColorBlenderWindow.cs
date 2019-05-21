@@ -28,6 +28,11 @@ namespace EZUnity
         public Dictionary<string, ColorField> colorFields = new Dictionary<string, ColorField>();
         public Dictionary<string, TextField> colorStringFields = new Dictionary<string, TextField>();
 
+        [MenuItem("EZUnity/Experimental/Color Blender", false)]
+        private static void CreateWindow()
+        {
+            GetWindow<EZColorBlenderWindow>("EZ Color Blender").Show();
+        }
 
         private void OnEnable()
         {
