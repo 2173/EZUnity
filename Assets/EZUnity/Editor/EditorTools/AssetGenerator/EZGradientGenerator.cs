@@ -5,10 +5,10 @@
  */
 using UnityEngine;
 
-namespace EZUnity
+namespace EZUnity.AssetGenerator
 {
     [CreateAssetMenu(fileName = "EZGradientGenerator", menuName = "EZUnity/EZGradientGenerator", order = (int)EZAssetMenuOrder.EZGradientGenerator)]
-    public class EZGradientGenerator : EZTextureGenerator
+    public class EZGradientGenerator : _EZTextureGenerator
     {
         public static readonly float iSqrt2 = 1 / Mathf.Sqrt(2);
 
@@ -37,7 +37,7 @@ namespace EZUnity
         public AnimationCurve coordinateY = AnimationCurve.Linear(0, 0, 1, 1);
         public Rotation rotation = Rotation.None;
 
-        protected override void SetPixels(Texture2D texture)
+        public override void ApplyToTexture(Texture2D texture)
         {
             switch (coordinateMode)
             {
@@ -57,7 +57,6 @@ namespace EZUnity
                     SetPixels(texture, SamplerAngle);
                     break;
             }
-            texture.Apply();
         }
 
         private void SetPixels(Texture2D texture, Sampler sampler)

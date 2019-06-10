@@ -5,9 +5,9 @@
  */
 using UnityEngine;
 
-namespace EZUnity
+namespace EZUnity.AssetGenerator
 {
-    public abstract class EZMeshGenerator : ScriptableObject
+    public abstract class _EZMeshGenerator : ScriptableObject
     {
         private Mesh m_TargetMesh;
         public Mesh targetMesh

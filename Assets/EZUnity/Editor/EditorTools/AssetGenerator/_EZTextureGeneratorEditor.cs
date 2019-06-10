@@ -6,12 +6,12 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EZUnity
+namespace EZUnity.AssetGenerator
 {
-    [CustomEditor(typeof(EZTextureGenerator), true)]
-    public class EZTextureGeneratorEditor : Editor
+    [CustomEditor(typeof(_EZTextureGenerator), true)]
+    public class _EZTextureGeneratorEditor : Editor
     {
-        protected EZTextureGenerator generator;
+        protected _EZTextureGenerator generator;
 
         protected SerializedProperty resolution;
         protected SerializedProperty textureFormat;
@@ -32,7 +32,7 @@ namespace EZUnity
 
         protected void OnEnable()
         {
-            generator = target as EZTextureGenerator;
+            generator = target as _EZTextureGenerator;
             resolution = serializedObject.FindProperty("resolution");
             textureFormat = serializedObject.FindProperty("textureFormat");
             textureEncoding = serializedObject.FindProperty("textureEncoding");
@@ -110,6 +110,7 @@ namespace EZUnity
         public void RefreshPreview()
         {
             generator.ApplyToTexture(previewTexture);
+            previewTexture.Apply();
             Repaint();
         }
     }

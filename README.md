@@ -15,6 +15,8 @@
 
 ## 附加设置 ([Edit/ProjectSettings/EZUnity/..](Assets/EZUnity/Demo/EZProjectSettings/README.md))
 
+Unity2018.3以上版本在ProjectSettings窗口中，**低版本在Preferences窗口中**
+
 - EZEditorSettings: 开启某些选项能提高工作效率
 - EZGraphicsSettings: 提供更加方便的界面来管理AlwaysIncludedShaders，其他功能开发中
 - EZScriptSettings: 提供脚本模板的管理功能
@@ -33,8 +35,11 @@
 - EZMeshGenerator:
   - EZPlaneGenerator: 用来生成自定义平面网格的工具
 - EZTextureGenerator:
-  - EZTextureChannelModifier: 用来调整图片通道的工具
-  - EZGradientGenerator: 使用渐变和坐标曲线生成图片的工具
+  - EZGradientGenerator: 利用渐变来生成图片的工具，配合XY轴的曲线可以生成很多复杂图案
+  - EZNoiseGenerator: 噪点图片生成工具
+  - EZPerlinNoiseGenerator: 柏林噪声图片生成工具
+  - EZTextureChannelModifier: 图片通道调整工具
+  - EZTextureCombiner: 图片合并工具
 
 ## 一些比较有意思的Shader ([Materials](Assets/EZUnity/Demo/Materials/README.md))
 

@@ -6,10 +6,10 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EZUnity
+namespace EZUnity.AssetGenerator
 {
     [CustomEditor(typeof(EZTextureChannelModifier))]
-    public class EZTextureChannelModifierEditor : EZTextureGeneratorEditor
+    public class EZTextureChannelModifierEditor : _EZTextureGeneratorEditor
     {
         private SerializedProperty m_ReferenceTexture;
 

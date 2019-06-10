@@ -14,6 +14,7 @@
 [Ll]ogs/
 [Bb]uild/
 [Bb]uilds/
+ProjectSettings/ProjectVersion.txt
 
 # EZUnity
 EZPersistent/
@@ -26,6 +27,12 @@ Assets/ThirdParty/
 Assets/ThirdParty.meta
 Assets/XLua/Gen/
 Assets/XLua/Gen.meta
+
+# Others
+Assets/VDProject
+Assets/VDProject.meta
+Assets/AssetStoreTools
+Assets/AssetStoreTools.meta
 
 # Windows image file caches
 Thumbs.db
