@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XLua;
 
-namespace EZUnity.Example
+namespace EZhex1991.EZUnity.Example
 {
     public static class GenListForEZUnity
     {
@@ -52,10 +52,6 @@ namespace EZUnity.Example
             typeof(EZUnity.EZTimer.Task),
             typeof(EZUnity.EZTimer.TickMode),
 
-            typeof(EZUnity.Animation.EZGraphicColorAnimation),
-            typeof(EZUnity.Animation.EZRectTransformAnimation),
-            typeof(EZUnity.Animation.EZTransformAnimation),
-
             typeof(EZUnity.EZUISorter),
             typeof(EZUnity.EZGridLayout2D),
             typeof(EZUnity.EZOutstand),
@@ -94,8 +90,6 @@ namespace EZUnity.Example
             typeof(EZUnity.XLuaExtension.OnMessageAction<bool>),
             typeof(EZUnity.XLuaExtension.OnMessageAction<Collider>),
             typeof(EZUnity.XLuaExtension.OnMessageAction<Collision>),
-
-            typeof(EZUnity.Animation.OnAnimationEndAction),
 
             typeof(EZUnity.EZScrollRect.OnBeginScrollAction),
             typeof(EZUnity.EZScrollRect.OnEndScrollAction),
