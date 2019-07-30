@@ -11,12 +11,16 @@ using UnityEngine;
 public class EZShaderGUI : ShaderGUI
 {
     public const string Tag_RenderType = "RenderType";
+
     public const string Keyword_SecondOn = "_SECOND_ON";
     public const string Keyword_BumpOn = "_BUMP_ON";
     public const string Keyword_SpecOn = "_SPEC_ON";
     public const string Keyword_AddLightOn = "_ADDLIGHT_ON";
     public const string Keyword_AOOn = "_AO_ON";
+    public const string Keyword_AlphaTex_On = "_ALPHATEX_ON";
+
     public const string Property_AlphaMode = "_AlphaMode";
+    public const string Property_AlphaTex = "_AlphaTex";
     public const string Property_AlphaClipThreshold = "_AlphaClipThreshold";
     public const string Property_SrcBlendMode = "_SrcBlendMode";
     public const string Property_DstBlendMode = "_DstBlendMode";
@@ -71,7 +75,9 @@ public class EZShaderGUI : ShaderGUI
         }
         if (scaleOffset)
         {
+            EditorGUI.indentLevel++;
             materialEditor.TextureScaleOffsetProperty(_MainTex);
+            EditorGUI.indentLevel--;
         }
     }
 
@@ -106,6 +112,7 @@ public class EZShaderGUI : ShaderGUI
         materialEditor.TexturePropertyFeatured(_BumpTex, _Bumpiness, Keyword_BumpOn, firstCall);
     }
 
+    private MaterialProperty _AlphaTex;
     private MaterialProperty _AlphaMode;
     private MaterialProperty _AlphaClipThreshold;
     private MaterialProperty _SrcBlendMode;
@@ -117,6 +124,10 @@ public class EZShaderGUI : ShaderGUI
     public static bool RenderingModePresetsFoldout = true;
     protected void RenderingSettingsGUI(MaterialEditor materialEditor, MaterialProperty[] properties)
     {
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("Rendering Settings", EditorStyles.boldLabel);
+
+        _AlphaTex = FindProperty(Property_AlphaTex, properties);
         _AlphaMode = FindProperty(Property_AlphaMode, properties);
         _AlphaClipThreshold = FindProperty(Property_AlphaClipThreshold, properties);
         _SrcBlendMode = FindProperty(Property_SrcBlendMode, properties);
@@ -126,19 +137,18 @@ public class EZShaderGUI : ShaderGUI
         _OffsetFactor = FindProperty(Property_OffsetFactor, properties);
         _OffsetUnit = FindProperty(Property_OffsetUnit, properties);
 
-        EditorGUILayout.Space();
-        EditorGUILayout.LabelField("Rendering Settings", EditorStyles.boldLabel);
+        materialEditor.TexturePropertyFeatured(_AlphaTex, Keyword_AlphaTex_On, firstCall);
         if (RenderingModePresetsGUI(materialEditor))
         {
             EditorGUI.indentLevel++;
-            materialEditor.KeywordEnum<AlphaMode>(_AlphaMode);
-            if ((AlphaMode)(_AlphaMode.floatValue) == AlphaMode.AlphaTest)
+            materialEditor.ShaderProperty(_AlphaMode);
+            if (!_AlphaMode.hasMixedValue && (AlphaMode)(_AlphaMode.floatValue) == AlphaMode.AlphaTest)
             {
                 materialEditor.ShaderProperty(_AlphaClipThreshold);
             }
             materialEditor.ShaderProperty(_SrcBlendMode);
             materialEditor.ShaderProperty(_DstBlendMode);
-            materialEditor.Toggle(_ZWriteMode);
+            materialEditor.ShaderProperty(_ZWriteMode);
             EditorGUI.indentLevel--;
         }
 
@@ -148,7 +158,7 @@ public class EZShaderGUI : ShaderGUI
 
         if (firstCall)
         {
-            (materialEditor.target as Material).SetKeyword((AlphaMode)_AlphaMode.floatValue);
+            (materialEditor.target as Material).SetKeyword("_AlphaMode", (AlphaMode)_AlphaMode.floatValue);
         }
     }
     protected bool RenderingModePresetsGUI(MaterialEditor materialEditor)
@@ -170,11 +180,12 @@ public class EZShaderGUI : ShaderGUI
     }
     protected void SetupRenderingMode(Material material, RenderingModePresets renderMode)
     {
+        Undo.RecordObject(material, "Set Rendering Mode");
         switch (renderMode)
         {
             case RenderingModePresets.Opaque:
                 material.SetOverrideTag(Tag_RenderType, "Opaque");
-                material.SetKeyword(AlphaMode.None);
+                material.SetKeyword("_AlphaMode", AlphaMode.None);
                 material.SetInt(Property_AlphaMode, (int)AlphaMode.None);
                 material.SetInt(Property_SrcBlendMode, (int)UnityEngine.Rendering.BlendMode.One);
                 material.SetInt(Property_DstBlendMode, (int)UnityEngine.Rendering.BlendMode.Zero);
@@ -183,7 +194,7 @@ public class EZShaderGUI : ShaderGUI
                 break;
             case RenderingModePresets.Cutout:
                 material.SetOverrideTag(Tag_RenderType, "TransparentCutout");
-                material.SetKeyword(AlphaMode.AlphaTest);
+                material.SetKeyword("_AlphaMode", AlphaMode.AlphaTest);
                 material.SetInt(Property_AlphaMode, (int)AlphaMode.AlphaTest);
                 material.SetInt(Property_SrcBlendMode, (int)UnityEngine.Rendering.BlendMode.One);
                 material.SetInt(Property_DstBlendMode, (int)UnityEngine.Rendering.BlendMode.Zero);
@@ -192,7 +203,7 @@ public class EZShaderGUI : ShaderGUI
                 break;
             case RenderingModePresets.Fade:
                 material.SetOverrideTag(Tag_RenderType, "Transparent");
-                material.SetKeyword(AlphaMode.AlphaBlend);
+                material.SetKeyword("_AlphaMode", AlphaMode.AlphaBlend);
                 material.SetInt(Property_AlphaMode, (int)AlphaMode.AlphaBlend);
                 material.SetInt(Property_SrcBlendMode, (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
                 material.SetInt(Property_DstBlendMode, (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
@@ -201,7 +212,7 @@ public class EZShaderGUI : ShaderGUI
                 break;
             case RenderingModePresets.Transparent:
                 material.SetOverrideTag(Tag_RenderType, "Transparent");
-                material.SetKeyword(AlphaMode.None);
+                material.SetKeyword("_AlphaMode", AlphaMode.AlphaPremultiply);
                 material.SetInt(Property_AlphaMode, (int)AlphaMode.AlphaPremultiply);
                 material.SetInt(Property_SrcBlendMode, (int)UnityEngine.Rendering.BlendMode.One);
                 material.SetInt(Property_DstBlendMode, (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);

@@ -7,10 +7,26 @@ namespace EZhex1991.EZUnity
 {
     public enum EZAssetMenuOrder
     {
-        _Section_1 = 1100,
-        EZStringAsset,
+        /// <summary>
+        /// Default Asset Order
+        /// </summary>
+        _Section_0 = 10000,
 
-        _Section_2 = 1200,
+        /// <summary>
+        /// Collection Asset
+        /// </summary>
+        _Section_1 = 11000,
+        EZListAsset_String,
+        EZListAsset_Object,
+        EZMapAsset_String_String,
+        EZMapAsset_String_Int,
+        EZMapAsset_String_Object,
+        EZMapAsset_String_TextCollection,
+
+        /// <summary>
+        /// Asset Generator
+        /// </summary>
+        _Section_2 = 12000,
         EZPlaneGenerator,
         EZTextureChannelModifier,
         EZTextureCombiner,
@@ -18,20 +34,32 @@ namespace EZhex1991.EZUnity
         EZNoiseGenerator,
         EZPerlinNoiseGenerator,
 
-        _Section_3 = 1300,
+        /// <summary>
+        /// Tools
+        /// </summary>
+        _Section_3 = 13000,
         EZImageCapture,
+        EZScriptStatistics,
 
-        _Section_4 = 1400,
+        /// <summary>
+        /// Builder
+        /// </summary>
+        _Section_4 = 14000,
         EZBundleBuilder,
         EZPlayerBuilder,
 
-        _Section_5 = 1500,
-        EZScriptStatistics,
-
-        _Section_6 = 1600,
-        EZPhysicsBoneMaterial,
-
-        _Section_7 = 1700,
+        /// <summary>
+        /// Asset Manager
+        /// </summary>
+        _Section_5 = 15000,
         EZAssetListRenamer,
+
+        _Section_6 = 16000,
+
+        _Section_7 = 17000,
+
+        _Section_8 = 18000,
+
+        _Section_9 = 19000,
     }
 }

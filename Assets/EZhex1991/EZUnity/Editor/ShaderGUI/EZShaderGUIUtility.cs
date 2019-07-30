@@ -68,6 +68,7 @@ namespace EZhex1991.EZUnity
             }
         }
 
+        [System.Obsolete("Use [KeywordEnum] on shader instead")]
         public static void KeywordEnum<T>(this MaterialEditor materialEditor, MaterialProperty property, params GUILayoutOption[] options)
 #if CSHARP_7_3_OR_NEWER
             where T : Enum
@@ -75,9 +76,10 @@ namespace EZhex1991.EZUnity
         {
             materialEditor.EnumPopup<T>(property, (mat, selection) =>
             {
-                mat.SetKeyword(selection);
+                mat.SetKeyword(property.name, selection);
             }, options);
         }
+        [System.Obsolete("Use [KeywordEnum] on shader instead")]
         public static void KeywordEnum<T>(this MaterialEditor materialEditor, MaterialProperty property, string label, params GUILayoutOption[] options)
 #if CSHARP_7_3_OR_NEWER
             where T : Enum
@@ -85,10 +87,11 @@ namespace EZhex1991.EZUnity
         {
             materialEditor.EnumPopup<T>(property, label, (mat, selection) =>
             {
-                mat.SetKeyword(selection);
+                mat.SetKeyword(property.name, selection);
             }, options);
         }
 
+        [System.Obsolete("Use [Enum] on shader instead")]
         public static void EnumPopup<T>(this MaterialEditor materialEditor, MaterialProperty property, Action<Material, Enum> callback = null, params GUILayoutOption[] options)
 #if CSHARP_7_3_OR_NEWER
             where T : Enum
@@ -96,6 +99,7 @@ namespace EZhex1991.EZUnity
         {
             materialEditor.EnumPopup<T>(property, property.displayName, callback, options);
         }
+        [System.Obsolete("Use [Enum] on shader instead")]
         public static void EnumPopup<T>(this MaterialEditor materialEditor, MaterialProperty property, string label, Action<Material, Enum> callback = null, params GUILayoutOption[] options)
 #if CSHARP_7_3_OR_NEWER
             where T : Enum
@@ -121,10 +125,12 @@ namespace EZhex1991.EZUnity
             EditorGUI.showMixedValue = false;
         }
 
+        [System.Obsolete("Use [Toggle] on shader instead")]
         public static void Toggle(this MaterialEditor materialEditor, MaterialProperty property, Action<Material, bool> callback = null, params GUILayoutOption[] options)
         {
             materialEditor.Toggle(property, property.displayName, callback, options);
         }
+        [System.Obsolete("Use [Toggle] on shader instead")]
         public static void Toggle(this MaterialEditor materialEditor, MaterialProperty property, string label, Action<Material, bool> callback = null, params GUILayoutOption[] options)
         {
             EditorGUI.showMixedValue = property.hasMixedValue;
@@ -146,10 +152,12 @@ namespace EZhex1991.EZUnity
             EditorGUI.showMixedValue = false;
         }
 
+        [System.Obsolete("Use [EZMinMaxSlider] on shader instead")]
         public static void MinMaxSlider(this MaterialEditor materialEditor, MaterialProperty property, float minValue = 0, float maxValue = 1)
         {
             MinMaxSlider(materialEditor, property, property.displayName, minValue, maxValue);
         }
+        [System.Obsolete("Use [EZMinMaxSlider] on shader instead")]
         public static void MinMaxSlider(this MaterialEditor materialEditor, MaterialProperty property, string label, float minValue = 0, float maxValue = 1)
         {
             Rect position = EditorGUILayout.GetControlRect();
@@ -172,9 +180,9 @@ namespace EZhex1991.EZUnity
             }
         }
 
-        public static void SetKeyword(this MaterialEditor materialEditor, Enum selection)
+        public static void SetKeyword(this MaterialEditor materialEditor, string prefix, Enum selection)
         {
-            (materialEditor.target as Material).SetKeyword(selection);
+            (materialEditor.target as Material).SetKeyword(prefix, selection);
         }
         public static void SetKeyword(this MaterialEditor materialEditor, string keyword, bool value)
         {

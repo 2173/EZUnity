@@ -1,0 +1,15 @@
+/* Author:          #AUTHORNAME#
+ * CreateTime:      #CREATETIME#
+ * Organization:    #ORGANIZATION#
+ * Description:     
+ */
+using UnityEngine;
+
+namespace EZhex1991.EZUnity
+{
+    [CreateAssetMenu(fileName = "#SCRIPTNAME#", menuName = "EZUnity/#SCRIPTNAME#", order = (int)EZAssetMenuOrder._Section_0)]
+    public class #SCRIPTNAME# : ScriptableObject
+    {
+        
+    }
+}

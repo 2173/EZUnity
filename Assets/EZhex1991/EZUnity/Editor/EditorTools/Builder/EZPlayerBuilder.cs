@@ -16,6 +16,34 @@ namespace EZhex1991.EZUnity.Builder
     [CreateAssetMenu(fileName = "EZPlayerBuilder", menuName = "EZUnity/EZPlayerBuilder", order = (int)EZAssetMenuOrder.EZPlayerBuilder)]
     public class EZPlayerBuilder : ScriptableObject
     {
+        public static BuildTargetGroup GetGroup(BuildTarget buildTarget)
+        {
+            switch (buildTarget)
+            {
+                case BuildTarget.NoTarget: return BuildTargetGroup.Unknown;
+                case BuildTarget.StandaloneOSX: return BuildTargetGroup.Standalone;
+                case BuildTarget.StandaloneWindows: return BuildTargetGroup.Standalone;
+                case BuildTarget.StandaloneWindows64: return BuildTargetGroup.Standalone;
+                case BuildTarget.StandaloneLinux: return BuildTargetGroup.Standalone;
+                case BuildTarget.StandaloneLinux64: return BuildTargetGroup.Standalone;
+                case BuildTarget.StandaloneLinuxUniversal: return BuildTargetGroup.Standalone;
+                case BuildTarget.iOS: return BuildTargetGroup.iOS;
+                case BuildTarget.Android: return BuildTargetGroup.Android;
+                case BuildTarget.WebGL: return BuildTargetGroup.WebGL;
+                case BuildTarget.WSAPlayer: return BuildTargetGroup.WSA;
+                case BuildTarget.Tizen: return BuildTargetGroup.Tizen;
+                case BuildTarget.PSP2: return BuildTargetGroup.PSP2;
+                case BuildTarget.PS4: return BuildTargetGroup.PS4;
+                case BuildTarget.PSM: return BuildTargetGroup.PSM;
+                case BuildTarget.XboxOne: return BuildTargetGroup.XboxOne;
+                case BuildTarget.N3DS: return BuildTargetGroup.N3DS;
+                case BuildTarget.WiiU: return BuildTargetGroup.WiiU;
+                case BuildTarget.tvOS: return BuildTargetGroup.tvOS;
+                case BuildTarget.Switch: return BuildTargetGroup.Switch;
+                default: return BuildTargetGroup.Unknown;
+            }
+        }
+
         public const string Wildcard_Date = "<Date>";
         public const string Wildcard_Time = "<Time>";
         public const string Wildcard_CompanyName = "<CompanyName>";
@@ -26,6 +54,7 @@ namespace EZhex1991.EZUnity.Builder
         public const string Wildcard_BuildTarget = "<BuildTarget>";
 
         public bool configButDontBuild;
+        public BuildTarget buildTarget = BuildTarget.NoTarget;
         public BuildOptions buildOptions = BuildOptions.ShowBuiltPlayer;
 
         public EZBundleBuilder bundleBuilder;
@@ -43,7 +72,7 @@ namespace EZhex1991.EZUnity.Builder
 
         public EZCopyList copyList;
 
-        public void Config(BuildTargetGroup buildTargetGroup, BuildTarget buildTarget)
+        public void ConfigTargetGroup(BuildTargetGroup buildTargetGroup)
         {
             if (!string.IsNullOrEmpty(companyName)) PlayerSettings.companyName = companyName;
             if (!string.IsNullOrEmpty(productName)) PlayerSettings.productName = productName;
@@ -72,9 +101,9 @@ namespace EZhex1991.EZUnity.Builder
             }
 
         }
-        public void Execute(BuildTargetGroup buildTargetGroup, BuildTarget buildTarget)
+        public void Execute(BuildTarget buildTarget)
         {
-            Config(buildTargetGroup, buildTarget);
+            ConfigTargetGroup(GetGroup(buildTarget));
             if (configButDontBuild) return;
             if (bundleBuilder != null)
             {
