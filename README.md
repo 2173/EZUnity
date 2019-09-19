@@ -21,6 +21,30 @@ Unity2018.3以上版本在ProjectSettings窗口中，**低版本在Preferences�
 - EZGraphicsSettings: 提供更加方便的界面来管理AlwaysIncludedShaders，其他功能开发中
 - EZScriptSettings: 提供脚本模板的管理功能
 
+## 图片处理工具([Asset/Create/EZUnity/EZTextureProcessor/...](Assets/EZhex1991/EZTextureProcessor/README.md))
+
+- 图片生成
+  - EZGaussianLutGenerator: 高斯查找表
+  - EZGradient1DTextureGenerator: 渐变生成图片
+  - EZGradient2DTextureGenerator: 坐标运算+渐变
+  - EZWaveTextureGenerator: 波浪图形
+  - EZPerlinNoiseTextureGenerator: 柏林噪声
+  - EZPixelNoiseTextureGenerator: 随机噪点
+  - EZSimpleNoiseTextureGenerator: 普通噪声
+  - EZVoronoiTextureGenerator: 泰森多边形
+
+- 图片处理（部分shader可直接用于后处理）
+  - EZTextureBlurProcessor: 模糊（配合高斯查找表做高斯模糊）
+  - EZColorBasedOutline: 基于色彩容差的图片描边
+  - EZTextureSpherize: 球面化处理
+  - EZTextureTwirl: 漩涡扭曲处理
+  - EZTextureChannelModifier: 图片通道调整（交换通道、提取单通道、调整特定通道曲线）
+  - EZTextureCombiner: 图片拼合
+
+- 通用（自定义）
+  - EZMaterialToTexture: 材质直接输出图片（不要使用依赖光照的Shader！！！）
+  - EZTexturePipeline: 图片处理管线，多个图片处理会按顺序执行
+
 ## 附加资源 ([Asset/Create/EZUnity/...](Assets/EZhex1991/EZUnity/Demo/CustomAssets/README.md))
 
 - EZImageCapture: 截图工具
@@ -29,17 +53,6 @@ Unity2018.3以上版本在ProjectSettings窗口中，**低版本在Preferences�
   - EZMode: 偏向目录结构管理，设置bundle名称、路径和文件搜索条件去进行build。
   - Manager Mode: 偏向单个资源设置，会读取当前项目中Inspector中对单个资源的bundle设置。
 - EZScriptStatistics: 用来统计代码量的工具，可以通过正则式来对代码文件进行分类统计，需要预先对代码模板进行设置。通过指定IncludePaths、ExcludePaths和正则式匹配来统计代码
-
-## 资源生成器 ([Asset/Create/EZUnity/EZAssetGenerator/...](Assets/EZhex1991/EZUnity/Demo/EZAssetGenerator/README.md))
-
-- EZMeshGenerator:
-  - EZPlaneGenerator: 用来生成自定义平面网格的工具
-- EZTextureGenerator:
-  - EZGradientGenerator: 利用渐变来生成图片的工具，配合XY轴的曲线可以生成很多复杂图案
-  - EZNoiseGenerator: 噪点图片生成工具
-  - EZPerlinNoiseGenerator: 柏林噪声图片生成工具
-  - EZTextureChannelModifier: 图片通道调整工具
-  - EZTextureCombiner: 图片合并工具
 
 ## 一些比较有意思的Shader ([Materials](Assets/EZhex1991/EZUnity/Demo/Materials/README.md))
 

@@ -5,23 +5,15 @@
  */
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace EZhex1991.EZUnity
 {
-    public class EZScriptSettings : _EZProjectSettingsSingleton<EZScriptSettings>
+    public class EZScriptSettings : EZProjectSettingsSingleton<EZScriptSettings>
     {
         public override string assetPath { get { return "ProjectSettings/EZScriptSettings.asset"; } }
 
         public string timeFormat = "yyyy-MM-dd HH:mm:ss";
-        public List<string> extensionList = new List<string> { ".cs", ".lua", ".txt", ".shader", ".cginc", "uxml", "uss", "asmdef" };
-
-        static EZScriptSettings()
-        {
-            string oldPath = "ProjectSettings/EZScriptTemplate.asset";
-            string newPath = "ProjectSettings/EZScriptSettings.asset";
-            if (File.Exists(oldPath) && !File.Exists(newPath)) File.Move(oldPath, newPath);
-        }
+        public List<string> extensionList = new List<string> { ".cs", ".lua", ".txt", ".shader", ".cginc", ".uxml", ".uss", ".asmdef" };
 
         [Serializable]
         public class Pattern
@@ -38,6 +30,7 @@ namespace EZhex1991.EZUnity
         {
             new Pattern("#ORGANIZATION#", ""),
             new Pattern("#AUTHORNAME#", ""),
+            new Pattern("#NAMESPACE#", "Namespace"),
         };
     }
 }

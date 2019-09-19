@@ -7,63 +7,42 @@ namespace EZhex1991.EZUnity
 {
     public enum EZMenuItemOrder
     {
-        /// <summary>
-        /// Default MenuItem Order
-        /// </summary>
         _Section_0 = 10000,
-
-        /// <summary>
-        /// Application
-        /// </summary>
-        _Section_1 = 11000,
         ApplicationSettings,
         OpenPersistentFolder,
         ClearPersistentFolder,
         PlayerPrefsEditor,
 
-        /// <summary>
-        /// Asset Manager
-        /// </summary>
-        _Section_2 = 12000,
+        _Section_1 = _Section_0 + 100,
         SaveAssets,
         RefreshAssetDatabase,
         Renamer,
 
-        /// <summary>
-        /// Viewer
-        /// </summary>
-        _Section_3 = 13000,
+        _Section_2 = _Section_0 + 200,
         AssetBundleManager,
         AssetReferenceViewer,
         CorrespondingObjectViewer,
         FontReferenceViewer,
 
-        /// <summary>
-        /// Helper
-        /// </summary>
-        _Section_4 = 14000,
+        _Section_3 = _Section_0 + 300,
         GuidGenerator,
         RegexTester,
         ColorBlender,
         TimePanel,
 
-        _Section_5 = 15000,
+        _Section_4 = _Section_0 + 400,
 
-        _Section_6 = 16000,
+        _Section_5 = _Section_0 + 500,
 
-        _Section_7 = 17000,
+        _Section_6 = _Section_0 + 600,
 
-        /// <summary>
-        /// XLuaExtension
-        /// </summary>
-        _Section_8 = 18000,
+        _Section_7 = _Section_0 + 700,
+
+        _Section_8 = _Section_0 + 800,
         LuaToTxt,
         ClearLuaTextFolder,
 
-        /// <summary>
-        /// Experimental
-        /// </summary>
-        _Section_9 = 19000,
+        _Section_9 = _Section_0 + 900,
         ShaderKeywordManager,
     }
 }
